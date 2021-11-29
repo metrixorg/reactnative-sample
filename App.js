@@ -60,13 +60,13 @@ class App extends React.Component {
     };
 
     sendEvent = () => {
-        Metrix.newEvent('perzu', {
+        Metrix.newEvent('lbuoa', {
             "name": "hisName"
         });
     };
 
     sendRevenue = () => {
-        Metrix.newRevenue('perzu', 2500.5, 1);
+        Metrix.newRevenue('ykwyp', 2500.5, 1);
     };
 
     render() {

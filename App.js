@@ -14,50 +14,54 @@ class App extends React.Component {
             userId: "",
             sessionId: ""
         };
-        Metrix.setOnAttributionChangedListener(this.callback);
-        Metrix.setPushToken('pushToken');
 
+        // iOS only
+        Metrix.initialize('zcmwmxbkmuodelu')
+
+        // Optional
+        Metrix.setOnAttributionChangedListener((attributionData) => {
+            this.setState({
+              attribution: JSON.stringify(attributionData)
+            });
+        });
+
+        // Optional
+        Metrix.setPushToken('pushToken');
+        
+        // Optional
         Metrix.addUserAttributes({
             "name": "hisName"
         });
 
-        Metrix.getSessionNum(this.sessionNumberCallback);
-        Metrix.getSessionId(this.sessionIdCallback);
+        // Optional
+        Metrix.setSessionNumberListener((sessionNum) => {
+            this.setState({
+                sessionNumber: sessionNum
+            });
+        });
 
+        // Optional
+        Metrix.setSessionIdListener((id) => {
+            this.setState({
+                sessionId: id
+            });
+        });
+        
+        // Optional
         Metrix.shouldLaunchDeeplink = true;
-        Metrix.setOnDeeplinkResponseListener(this.deeplinkCallback);
-        Metrix.setUserIdListener(this.userIdCallback);
+        Metrix.setOnDeeplinkResponseListener((deeplinkUri) => {
+            this.setState({
+                deeplink: deeplinkUri
+            });
+        });
+        
+        // Optional
+        Metrix.setUserIdListener((userIdValue) => {
+            this.setState({
+                userId: userIdValue
+            });
+        });
     }
-
-    callback = (attributionData) => {
-        this.setState({
-          attribution: JSON.stringify(attributionData)
-        });
-    };
-
-    sessionNumberCallback = (sessionNum) => {
-        this.setState({
-            sessionNumber: sessionNum
-        });
-    };
-
-    sessionIdCallback = (id) => {
-        this.setState({
-            sessionId: id
-        });
-    };
-
-    deeplinkCallback = (deeplinkUri) => {
-        this.setState({
-            deeplink: deeplinkUri
-        });
-    };
-
-    userIdCallback = (userIdValue) => {
-        this.setState({
-            userId: userIdValue
-        });
-    };
 
     sendEvent = () => {
         Metrix.newEvent('lbuoa', {

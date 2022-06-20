@@ -10,7 +10,6 @@ class App extends React.Component {
         this.state = {
             attribution: "",
             sessionNumber: "",
-            deeplink: "",
             userId: "",
             sessionId: ""
         };
@@ -24,9 +23,6 @@ class App extends React.Component {
               attribution: JSON.stringify(attributionData)
             });
         });
-
-        // Optional
-        Metrix.setPushToken('pushToken');
         
         // Optional
         Metrix.addUserAttributes({
@@ -44,14 +40,6 @@ class App extends React.Component {
         Metrix.setSessionIdListener((id) => {
             this.setState({
                 sessionId: id
-            });
-        });
-        
-        // Optional
-        Metrix.shouldLaunchDeeplink = true;
-        Metrix.setOnDeeplinkResponseListener((deeplinkUri) => {
-            this.setState({
-                deeplink: deeplinkUri
             });
         });
         
@@ -91,8 +79,6 @@ class App extends React.Component {
                <Text>sessionNumber: {this.state.sessionNumber}</Text>
                <Text/>
                <Text>sessionId: {this.state.sessionId}</Text>
-               <Text/>
-               <Text>deeplink: {this.state.deeplink}</Text>
                <Text/>
                <Text>userId: {this.state.userId}</Text>
                <Text/>

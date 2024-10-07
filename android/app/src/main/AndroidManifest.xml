@@ -37,5 +37,12 @@
         android:name="ir.metrix.SIGNATURE"
         android:value="ebIlAIDqHRSMEMO6PRijmM5uvaHnYpI5NFljCrI3NlbsgW5lnaUyGrOaPeA4NWPiNEmaiQ5pgjSiRiw2YJQ0HkX1XIwlzI5yrrYcPmhiSzD1YaomEF0=" />
 
+    <service
+        android:name=".CustomFirebaseMessagingService"
+        android:exported="false">
+      <intent-filter>
+        <action android:name="com.google.firebase.MESSAGING_EVENT" />
+      </intent-filter>
+    </service>
   </application>
 </manifest>
